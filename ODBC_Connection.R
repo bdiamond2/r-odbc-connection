@@ -18,11 +18,6 @@ myconn.infoaccess.direct <-  DBI::dbConnect(odbc::odbc(),"INFO",
                                     Driver= "Oracle in OraClient11g_home2",
                                     DBQ = "ccr-scan1.doit.wisc.edu:1521/dwhp_pdb_srv.doit.wisc.edu",
                                     Schema = "UW")
-                                            
-
-#InfoAccess Query
-infoaccess.awards <- DBI::dbGetQuery(myconn.infoaccess,query)
-
 
 query <- "SELECT DISTINCT
                       UW.RETENTION_AWARDS_MAIN.ID,
@@ -34,3 +29,9 @@ query <- "SELECT DISTINCT
                                     AND UW.RETENTION_AWARDS_PLAN.AWARD_NUMBER = UW.RETENTION_AWARDS_MAIN.AWARD_NUMBER
                     WHERE   UW.RETENTION_AWARDS_MAIN.CAREER = 'UGRD'
                     AND     UW.RETENTION_AWARDS_MAIN.AWARD_COMPLETION_TERM = '1212'"
+                                            
+
+#InfoAccess Query
+infoaccess.awards <- DBI::dbGetQuery(myconn.infoaccess,query)
+
+
