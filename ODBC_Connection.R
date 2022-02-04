@@ -6,18 +6,20 @@ library(dplyr)
 library(dbplyr)
 library(odbc)
 
-#user <- getPass()
+user <- ""
 pass <- getPass()
 
 #ODBC connection
 myconn.infoaccess <-  DBI::dbConnect(odbc::odbc(),"INFOACCESS",
-                                     uid=" ", pwd=pass)
+                                     uid=user, pwd=pass)
 
-myconn.infoaccess.direct <-  DBI::dbConnect(odbc::odbc(),"INFO",
-                                    uid=" ", pwd=pass,  
-                                    Driver= "Oracle in OraClient11g_home2",
+myconn.infoaccess.direct <-  DBI::dbConnect(odbc::odbc(),"InfoAccess",
+                                    uid=user, pwd=pass,  
+                                    Driver= "Oracle in OraClient12Home1",
                                     DBQ = "ccr-scan1.doit.wisc.edu:1521/dwhp_pdb_srv.doit.wisc.edu",
                                     Schema = "UW")
+
+rm(pass)
 
 query <- "SELECT DISTINCT
                       UW.RETENTION_AWARDS_MAIN.ID,
